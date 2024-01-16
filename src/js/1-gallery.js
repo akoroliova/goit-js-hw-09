@@ -1,3 +1,6 @@
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const images = [
   {
     preview:
@@ -68,17 +71,13 @@ const gallery = document.querySelector('ul.gallery');
 
 images.forEach(image => {
   const liElement = `<li class="gallery-item"><a class="gallery-link" href="${image.original}"><img class="gallery-image" src="${image.preview}" data-source="${image.original}" alt="${image.description}" /></a></li>`;
+
   gallery.insertAdjacentHTML('beforeend', liElement);
 });
 
-//додай відображення підписів до зображень з атрибута alt. Нехай підпис буде знизу і з'являється через 250 мілісекунд після відкриття модального вікна. Через 250 мілісекунд після відкривання модального вікна вміст атрибута alt з’являється знизу, як підпис до зображення
-
-const lightbox = new SimpleLightbox('.gallery-link a', {
-  /* options */
-});
-lightbox.on('show.simplelightbox', function () {
-  // Do something…
-});
-lightbox.on('error.simplelightbox', function (e) {
-  console.log(e); // Some usefull information
+const lightbox = new SimpleLightbox('.gallery .gallery-link', {
+  captions: true,
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
 });
